@@ -78,10 +78,10 @@ class DeepScoresV2:
             ob = OBBAnns(p)
             ob.load_annotations()
             ob.set_annotation_set_filter(['deepscores'])
-            for i in range(len(ob.img_info)):
+            for i in tqdm(range(len(ob.img_info)), desc=f'正在转换文件{os.path.split(p)[1]}'):
                 df = ob.get_anns(i)
                 filename = ob.img_info[i]['filename']
-                for j in tqdm(range(len(df)), desc=f"正在转换文件{filename}..."):
+                for j in range(len(df)):
                     with open(Path(outdir).joinpath(filename).with_suffix('.txt'), 'a+') as f:
                         ann =  df.iloc[j,]
                         content = ' '.join([str(k) for k in ann['o_bbox']])
