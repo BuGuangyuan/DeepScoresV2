@@ -93,6 +93,7 @@ class DeepScoresV2:
                         f.write(content)
 
     def get_cats(self, *annfiles, outfile, cats_anned=False):
+        assert not os.path.exists(outfile),f'{out}文件已经存在，请先删除或使用别的名称'
         out_dir, file = os.path.split(outfile)
         assert (os.path.splitext(file)[1] in ['.txt', '.py']), '输出的文件格式必须是.txt或.py格式'
         if not os.path.exists(out_dir):
@@ -130,18 +131,3 @@ class DeepScoresV2:
                else:
                    break
                kn = 0
-
-def run():
-    if len(sys.argv) < 3:
-        print('运行命令格式：python deepscores_to_dota.py deepscoresjasonfile outdir')
-        exit()
-    print(sys.argv[1], sys.argv[2])
-    # get_cat_image(sys.argv[1], sys.argv[2])
-
-# run()
-# ds2 = DeepScoresV2('sample\deepscores_v2_sample.json')
-ds2 = DeepScoresV2()
-# ds2.visualize_cats('..\datasets\ds2_dense\deepscores_train.json', '..\datasets\ds2_dense\deepscores_test.json', out='./', show=False)
-# ds2.get_cats('..\datasets\ds2_dense\deepscores_train.json', outfile='outdir/cats.txt')
-# ds2.visualize_annotation('..\datasets\ds2_dense\deepscores_train.json')
-
