@@ -93,7 +93,7 @@ class DeepScoresV2:
                         f.write(content)
 
     def get_cats(self, *annfiles, outfile, cats_anned=False):
-        assert not os.path.exists(outfile),f'{out}文件已经存在，请先删除或使用别的名称'
+        assert not os.path.exists(outfile),f'{outfile}文件已经存在，请先删除或使用别的名称'
         out_dir, file = os.path.split(outfile)
         assert (os.path.splitext(file)[1] in ['.txt', '.py']), '输出的文件格式必须是.txt或.py格式'
         if not os.path.exists(out_dir):
@@ -131,3 +131,7 @@ class DeepScoresV2:
                else:
                    break
                kn = 0
+
+if __name__=='__main__':
+    ds2 = DeepScoresV2()
+    ds2.get_cats('../../datasets/ds2_dense/deepscores_train.json', outfile='../out/cats.txt')
